@@ -10,27 +10,27 @@ import FutureLoadingBar from "@/components/FutureLoadingBar";
 import FortuneCookie from "@/components/FortuneCookie";
 import PasswordEntry from "@/components/PasswordEntry";
 import ComplimentTicker from "@/components/ComplimentTicker";
+import BirthdayCake from "@/components/BirthdayCake";
+import CoverflowSlider from "@/components/CoverflowSlider";
 import { AnimatePresence, motion } from "framer-motion";
 
-const Index = () => {
-  const [isUnlocked, setIsUnlocked] = useState(false);
+type FlowState = "locked" | "birthday" | "main";
 
-  useEffect(() => {
-    const unlocked = localStorage.getItem("site_unlocked");
-    if (unlocked === "true") {
-      setIsUnlocked(true);
-    }
-  }, []);
+const Index = () => {
+  const [flowState, setFlowState] = useState<FlowState>("locked");
 
   const handleUnlock = () => {
-    localStorage.setItem("site_unlocked", "true");
-    setIsUnlocked(true);
+    setFlowState("birthday");
+  };
+
+  const handleExtinguish = () => {
+    setFlowState("main");
   };
 
   return (
     <main className="relative min-h-screen bg-background overflow-x-hidden">
       <AnimatePresence mode="wait">
-        {!isUnlocked ? (
+        {flowState === "locked" && (
           <motion.div
             key="password-entry"
             initial={{ opacity: 1 }}
@@ -40,7 +40,22 @@ const Index = () => {
           >
             <PasswordEntry onUnlock={handleUnlock} />
           </motion.div>
-        ) : (
+        )}
+
+        {flowState === "birthday" && (
+          <motion.div
+            key="birthday-cake"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 1 }}
+            className="w-full"
+          >
+            <BirthdayCake onExtinguish={handleExtinguish} />
+          </motion.div>
+        )}
+
+        {flowState === "main" && (
           <motion.div
             key="main-content"
             initial={{ opacity: 0 }}
@@ -55,6 +70,7 @@ const Index = () => {
             <FutureLoadingBar />
             <FortuneCookie />
             <ComplimentTicker />
+            <CoverflowSlider />
             <Footer />
             <FloatingEnvelope />
           </motion.div>
