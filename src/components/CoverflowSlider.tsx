@@ -2,19 +2,20 @@ import React from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { EffectCoverflow, Pagination, Autoplay } from 'swiper/modules';
 import { motion } from 'framer-motion';
-import night1 from "@/assets/night1.jpg";
-import night2 from "@/assets/night2.mp4";
-import night3 from "@/assets/night3.mp4";
-import night4 from "@/assets/night4.mp4";
-import night5 from "@/assets/night5.mp4";
-import night6 from "@/assets/night6.mp4";
+
+// Import local assets with correct casing
+import night1 from "@/assets/night1.JPG";
+import night2 from "@/assets/night2.MP4";
+import night3 from "@/assets/night3.MP4";
+import night4 from "@/assets/night4.MP4";
+import night5 from "@/assets/night5.MP4";
+import night6 from "@/assets/night6.JPG";
+import monikVideo from '@/assets/monik.mp4';
 
 // Import Swiper styles
 import 'swiper/css';
 import 'swiper/css/effect-coverflow';
 import 'swiper/css/pagination';
-
-import monikVideo from '@/assets/monik.mp4';
 
 const CARDS = [
     {
@@ -38,7 +39,7 @@ const CARDS = [
         caption: "We fit together like pieces of a puzzle. I can't imagine a life without you by my side."
     },
     {
-        url: night1,
+        image: night1,
         name: "Sunset Soulmate",
         caption: "Watching the sun go down with you is my favorite pastime. Here's to many more sunsets together."
     }
@@ -100,7 +101,7 @@ const CoverflowSlider: React.FC = () => {
                                     />
                                 ) : (
                                     <img
-                                        src={card.url}
+                                        src={card.image}
                                         alt={card.name}
                                         className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
                                     />
