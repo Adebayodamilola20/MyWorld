@@ -1,31 +1,64 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Happy Birthday, Mary 💖</title>
-    <meta name="description" content="You are my sun shine and will forever be" />
-    <meta name="author" content="Stephen" />
 
-    <!-- Open Graph / Facebook / WhatsApp -->
-    <meta property="og:type" content="website" />
-    <meta property="og:url" content="https://mary-birthday.vercel.app/" />
-    <meta property="og:title" content="Happy Birthday, Mary 💖" />
-    <meta property="og:description" content="You are my sun shine and will forever be" />
-    <meta property="og:image" content="/og-image.png" />
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Happy Birthday, Mary 💖</title>
+  <meta name="description" content="You are my sun shine and will forever be" />
+  <meta name="author" content="Stephen" />
 
-    <!-- Twitter -->
-    <meta property="twitter:card" content="summary_large_image" />
-    <meta property="twitter:url" content="https://mary-birthday.vercel.app/" />
-    <meta property="twitter:title" content="Happy Birthday, Mary 💖" />
-    <meta property="twitter:description" content="You are my sun shine and will forever be" />
-    <meta property="twitter:image" content="/og-image.png" />
+  <!-- Open Graph / Facebook / WhatsApp -->
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://mary-birthday.vercel.app/" />
+  <meta property="og:title" content="Happy Birthday, Mary 💖" />
+  <meta property="og:description" content="You are my sun shine and will forever be" />
+  <meta property="og:image" content="/og-image.png" />
 
-    <link rel="icon" type="image/png" href="/og-image.png" />
-  </head>
+  <!-- Twitter -->
+  <meta property="twitter:card" content="summary_large_image" />
+  <meta property="twitter:url" content="https://mary-birthday.vercel.app/" />
+  <meta property="twitter:title" content="Happy Birthday, Mary 💖" />
+  <meta property="twitter:description" content="You are my sun shine and will forever be" />
+  <meta property="twitter:image" content="/og-image.png" />
 
-  <body>
-    <div id="root"></div>
-    <script type="module" src="/src/main.tsx"></script>
-  </body>
+  <link rel="icon" type="image/png" href="/og-image.png" />
+
+  <style>
+    #root:empty {
+      background: #fff5f7;
+      width: 100vw;
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: sans-serif;
+      color: #db2777;
+      font-size: 1.2rem;
+    }
+
+    #root:empty::after {
+      content: "Loading Mary's Birthday Surprise... ❤️";
+      animation: pulse 1.5s infinite;
+    }
+
+    @keyframes pulse {
+
+      0%,
+      100% {
+        opacity: 0.5;
+      }
+
+      50% {
+        opacity: 1;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div id="root"></div>
+  <script type="module" src="/src/main.tsx"></script>
+</body>
+
 </html>
