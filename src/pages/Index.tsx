@@ -29,13 +29,13 @@ const Index = () => {
 
   return (
     <main className="relative min-h-screen bg-background overflow-x-hidden">
-      <AnimatePresence mode="wait">
+      <AnimatePresence>
         {flowState === "locked" && (
           <motion.div
             key="password-entry"
             initial={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            transition={{ duration: 1 }}
+            transition={{ duration: 0.8 }}
             className="w-full"
           >
             <PasswordEntry onUnlock={handleUnlock} />
@@ -48,7 +48,7 @@ const Index = () => {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            transition={{ duration: 1 }}
+            transition={{ duration: 0.8 }}
             className="w-full"
           >
             <BirthdayCake onExtinguish={handleExtinguish} />
@@ -60,7 +60,7 @@ const Index = () => {
             key="main-content"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            transition={{ duration: 1.5, ease: "easeOut" }}
+            transition={{ duration: 1, ease: "easeOut" }}
           >
             <FloatingPetals />
             <HeroSection />
