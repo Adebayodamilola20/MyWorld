@@ -37,7 +37,6 @@ const HeroSection = () => {
               webkit-playsinline="true"
               controls={false}
               preload="auto"
-              onLoadedData={(e) => e.currentTarget.play()}
               className="w-full h-full object-cover"
             />
           </div>

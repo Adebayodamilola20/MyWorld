@@ -100,7 +100,6 @@ const CoverflowSlider: React.FC = () => {
                                         webkit-playsinline="true"
                                         controls={false}
                                         preload="auto"
-                                        onLoadedData={(e) => e.currentTarget.play()}
                                         className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
                                     />
                                 ) : (
