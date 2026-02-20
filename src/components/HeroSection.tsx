@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import monikVideo from "@/assets/monik.mp4";
+import Video from "@/assets/monik.mp4";
 
 const HeroSection = () => {
   return (
@@ -29,7 +29,7 @@ const HeroSection = () => {
         >
           <div className="w-64 h-80 md:w-80 md:h-[28rem] lg:w-[28rem] lg:h-[35rem] rounded-3xl overflow-hidden glow-rose border-4 border-white/20 bg-muted">
             <video
-              src={monikVideo}
+              src={Video}
               autoPlay
               loop
               muted

@@ -2,35 +2,43 @@ import React from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { EffectCoverflow, Pagination, Autoplay } from 'swiper/modules';
 import { motion } from 'framer-motion';
+import night1 from "@/assets/night1.jpg";
+import night2 from "@/assets/night2.mp4";
+import night3 from "@/assets/night3.mp4";
+import night4 from "@/assets/night4.mp4";
+import night5 from "@/assets/night5.mp4";
+import night6 from "@/assets/night6.mp4";
 
 // Import Swiper styles
 import 'swiper/css';
 import 'swiper/css/effect-coverflow';
 import 'swiper/css/pagination';
 
+import monikVideo from '@/assets/monik.mp4';
+
 const CARDS = [
     {
-        image: "https://images.unsplash.com/photo-1517841905240-472988babdf9?w=800&q=80",
+        video: night3,
         name: "A Beautiful Moment",
         caption: "Your smile lights up even my darkest days. You are the most beautiful person I know, inside and out."
     },
     {
-        image: "https://images.unsplash.com/photo-1524504388940-b1c1722653e1?w=800&q=80",
+        video: night2,
         name: "Eternal Love",
         caption: "Every second with you feels like a dream I never want to wake up from. I love you more than words can say."
     },
     {
-        image: "https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e?w=800&q=80",
+        video: night4,
         name: "My Everything",
         caption: "You are my peace, my joy, and my greatest adventure. Thank you for being mine."
     },
     {
-        image: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=800&q=80",
+        video: night5,
         name: "Perfect Together",
         caption: "We fit together like pieces of a puzzle. I can't imagine a life without you by my side."
     },
     {
-        image: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=800&q=80",
+        url: night1,
         name: "Sunset Soulmate",
         caption: "Watching the sun go down with you is my favorite pastime. Here's to many more sunsets together."
     }
@@ -81,11 +89,22 @@ const CoverflowSlider: React.FC = () => {
                     {CARDS.map((card, index) => (
                         <SwiperSlide key={index} className="w-[300px] md:w-[400px]">
                             <div className="relative aspect-[3/4] rounded-3xl overflow-hidden shadow-2xl group border border-white/20">
-                                <img
-                                    src={card.image}
-                                    alt={card.name}
-                                    className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
-                                />
+                                {card.video ? (
+                                    <video
+                                        src={card.video}
+                                        autoPlay
+                                        loop
+                                        muted
+                                        playsInline
+                                        className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                                    />
+                                ) : (
+                                    <img
+                                        src={card.url}
+                                        alt={card.name}
+                                        className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                                    />
+                                )}
 
                                 {/* Glassmorphism Text Overlay */}
                                 <div className="absolute bottom-0 left-0 right-0 p-6 bg-white/10 backdrop-blur-md border-t border-white/20 transform translate-y-2 group-hover:translate-y-0 transition-transform duration-500">
@@ -112,7 +131,7 @@ const CoverflowSlider: React.FC = () => {
           background-size: cover;
         }
         .swiper-pagination-bullet-active {
-          background: #db2777 ! from secondary !important;
+          background: #db2777 !important;
         }
         @keyframes float-slow {
           0%, 100% { transform: translate(0, 0); }
