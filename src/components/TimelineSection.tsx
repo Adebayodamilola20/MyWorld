@@ -3,24 +3,24 @@ import { Heart } from "lucide-react";
 
 const milestones = [
   {
-    date: "June 2021",
+    date: "November 2025",
     title: "The Day We Met",
     description: "A chance encounter that changed everything. The world became more colorful.",
   },
   {
-    date: "August 2021",
+    date: "January 2025",
     title: "Our First Date",
-    description: "Nervous laughter over coffee turned into hours of conversation we never wanted to end.",
+    description: "Nervous laughter at the cinema turned into hours of conversation we never wanted to end.",
   },
   {
-    date: "December 2021",
+    date: "21th November 2025",
     title: "First 'I Love You'",
     description: "Three words that felt like coming home. Whispered under a sky full of stars.",
   },
   {
-    date: "February 2022",
+    date: "January 2025",
     title: "Our First Trip Together",
-    description: "Sunsets, adventures, and the realization that anywhere with you is paradise.",
+    description: "Cinemas, Outdoors, and the realization that anywhere with you is paradise.",
   },
   {
     date: "Today",
@@ -61,9 +61,8 @@ const TimelineSection = () => {
                 whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ once: true, margin: "-50px" }}
                 transition={{ duration: 0.6, delay: i * 0.15 }}
-                className={`relative flex items-start mb-16 md:mb-20 ${
-                  isLeft ? "md:flex-row" : "md:flex-row-reverse"
-                } flex-row`}
+                className={`relative flex items-start mb-16 md:mb-20 ${isLeft ? "md:flex-row" : "md:flex-row-reverse"
+                  } flex-row`}
               >
                 {/* Content */}
                 <div className={`ml-16 md:ml-0 md:w-1/2 ${isLeft ? "md:pr-12 md:text-right" : "md:pl-12"}`}>
