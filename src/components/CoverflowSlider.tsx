@@ -4,14 +4,7 @@ import { EffectCoverflow, Pagination, Autoplay } from 'swiper/modules';
 import { motion } from 'framer-motion';
 
 // Import local assets with correct casing
-import night1 from "@/assets/night1.JPG";
-import night2 from "@/assets/night2.MP4";
-import night3 from "@/assets/night3.MP4";
-import night4 from "@/assets/night4.MP4";
-import night5 from "@/assets/night5.MP4";
-import night6 from "@/assets/night6.JPG";
-import monikVideo from '@/assets/monik.mp4';
-import m2 from "@/assets/m2.mp4";
+import m22 from "@/assets/m2.mp4";
 import m3 from "@/assets/m3.mp4";
 import m5 from "@/assets/m5.mp4";
 import m6 from "@/assets/m6.mp4";
@@ -26,7 +19,7 @@ import 'swiper/css/pagination';
 
 const CARDS = [
     {
-        video: m2,
+        video: m22,
         name: "A Beautiful Moment",
         caption: "Your smile lights up even my darkest days. You are the most beautiful person I know, inside and out."
     },
