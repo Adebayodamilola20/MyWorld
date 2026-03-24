@@ -11,6 +11,13 @@ import night4 from "@/assets/night4.MP4";
 import night5 from "@/assets/night5.MP4";
 import night6 from "@/assets/night6.JPG";
 import monikVideo from '@/assets/monik.mp4';
+import m2 from "@/assets/m2.mp4";
+import m3 from "@/assets/m3.mp4";
+import m5 from "@/assets/m5.mp4";
+import m6 from "@/assets/m6.mp4";
+import m7 from "@/assets/m7.mp4";
+
+
 
 // Import Swiper styles
 import 'swiper/css';
@@ -19,27 +26,27 @@ import 'swiper/css/pagination';
 
 const CARDS = [
     {
-        video: night3,
+        video: m2,
         name: "A Beautiful Moment",
         caption: "Your smile lights up even my darkest days. You are the most beautiful person I know, inside and out."
     },
     {
-        video: night2,
+        video: m3,
         name: "Eternal Love",
         caption: "Every second with you feels like a dream I never want to wake up from. I love you more than words can say."
     },
     {
-        video: night4,
+        video: m5,
         name: "My Everything",
         caption: "You are my peace, my joy, and my greatest adventure. Thank you for being mine."
     },
     {
-        video: night5,
+        video: m6,
         name: "Perfect Together",
         caption: "We fit together like pieces of a puzzle. I can't imagine a life without you by my side."
     },
     {
-        image: night1,
+        video: m7,
         name: "Sunset Soulmate",
         caption: "Watching the sun go down with you is my favorite pastime. Here's to many more sunsets together."
     }

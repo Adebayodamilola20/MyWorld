@@ -1,16 +1,5 @@
 import { motion } from "framer-motion";
 import she1 from "@/assets/she1.jpg";
-import she2 from "@/assets/she2.jpg";
-import she3 from "@/assets/she3.jpg";
-import gall1 from "@/assets/gallery-1.jpg";
-import gall2 from "@/assets/gallery-2.jpg";
-import gall3 from "@/assets/gallery-3.jpg";
-import gall4 from "@/assets/gallery-4.jpg";
-import gall5 from "@/assets/gallery-5.jpg";
-import gall6 from "@/assets/gallery-6.jpg";
-import photo1 from "@/assets/PHOTO-2025-11-21-19-31-29.jpg";
-import photo2 from "@/assets/PHOTO-2025-11-21-19-31-30.jpg";
-import photo3 from "@/assets/PHOTO-2025-11-21-19-31-59.jpg";
 import she4 from "@/assets/she4.jpg";
 import she5 from "@/assets/she5.jpg";
 import she6 from "@/assets/she6.jpg";
@@ -22,57 +11,35 @@ import her2 from "@/assets/her2.jpg";
 import her3 from "@/assets/her3.jpg";
 import her5 from "@/assets/her5.jpg";
 import her66 from "@/assets/her66.jpg";
+import m7 from "@/assets/m7.jpg";
+import m1 from "@/assets/m1.jpg";
+import m4 from "@/assets/m4.jpg";
+import m6 from "@/assets/m6.jpg";
+import m8 from "@/assets/m8.jpg";
+import m5 from "@/assets/m5.jpg";
 
 const photos = [
   {
-    src: her1,
+    src: m1,
     caption: "Timeless Beauty"
   },
   {
-    src: she2,
+    src: m4,
     alt: "Ethereal Light",
     caption: "Soft Whispers"
   },
   {
-    src: her3,
+    src: m6,
     alt: "Luxury Fabric",
     caption: "Silk & Satin"
   },
   {
-    src: she4,
+    src: m8,
     caption: "Graceful Motion"
   },
   {
-    src: she5,
+    src: m5,
     caption: "Velvet Dreams"
-  },
-  {
-    src: she6,
-    caption: "Luminous Soul"
-  },
-  {
-    src: she7,
-    caption: "Elegant Gaze"
-  },
-  {
-    src: she8,
-    caption: "Serene Moments"
-  },
-  {
-    src: she9,
-    caption: "Infinite Warmth"
-  },
-  {
-    src: her2,
-    caption: "Golden Whisper"
-  },
-  {
-    src: her5,
-    caption: "Floral Bloom"
-  },
-  {
-    src: her66,
-    caption: "Midnight Pearl"
   },
 ];
 

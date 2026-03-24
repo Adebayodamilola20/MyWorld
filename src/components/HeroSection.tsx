@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
 import Video from "@/assets/monik.mp4";
 import video2 from "@/assets/mezmorize.mp4";
+import vid3 from "@/assets/m2.mp4";
 
 const HeroSection = () => {
   return (
@@ -30,7 +31,7 @@ const HeroSection = () => {
         >
           <div className="w-64 h-80 md:w-80 md:h-[28rem] lg:w-[28rem] lg:h-[35rem] rounded-3xl overflow-hidden glow-rose border-4 border-white/20 bg-muted">
             <video
-              src={video2}
+              src={vid3}
               autoPlay
               loop
               muted
