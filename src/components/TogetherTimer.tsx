@@ -11,8 +11,8 @@ const TogetherTimer = () => {
     });
 
     useEffect(() => {
-        // Starting date: November 12, 2025
-        const startDate = new Date("2025-11-12T00:00:00");
+        // Starting date: September 9, 2026
+        const startDate = new Date("2026-09-09T00:00:00");
 
         const calculateTime = () => {
             const now = new Date();

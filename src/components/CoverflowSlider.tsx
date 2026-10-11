@@ -1,51 +1,58 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
-import { EffectCoverflow, Pagination, Autoplay } from 'swiper/modules';
+import type { Swiper as SwiperInstance } from 'swiper';
+import { EffectCoverflow, Autoplay } from 'swiper/modules';
 import { motion } from 'framer-motion';
 
 // Import local assets with correct casing
-import m22 from "@/assets/m2.mp4";
-import m3 from "@/assets/m3.mp4";
-import m5 from "@/assets/m5.mp4";
-import m6 from "@/assets/m6.mp4";
-import m7 from "@/assets/m7.mp4";
-
+import { maryamVideos, maryamVideoPosters } from "@/data/maryamMedia";
 
 
 // Import Swiper styles
 import 'swiper/css';
 import 'swiper/css/effect-coverflow';
-import 'swiper/css/pagination';
 
 const CARDS = [
     {
-        video: m22,
+        video: maryamVideos[0],
+        poster: maryamVideoPosters[0],
         name: "A Beautiful Moment",
         caption: "Your smile lights up even my darkest days. You are the most beautiful person I know, inside and out."
     },
     {
-        video: m3,
+        video: maryamVideos[1],
+        poster: maryamVideoPosters[1],
         name: "Eternal Love",
         caption: "Every second with you feels like a dream I never want to wake up from. I love you more than words can say."
     },
     {
-        video: m5,
+        video: maryamVideos[2],
+        poster: maryamVideoPosters[2],
         name: "My Everything",
         caption: "You are my peace, my joy, and my greatest adventure. Thank you for being mine."
     },
     {
-        video: m6,
+        video: maryamVideos[3],
+        poster: maryamVideoPosters[3],
         name: "Perfect Together",
         caption: "We fit together like pieces of a puzzle. I can't imagine a life without you by my side."
     },
     {
-        video: m7,
+        video: maryamVideos[4],
+        poster: maryamVideoPosters[4],
         name: "Sunset Soulmate",
         caption: "Watching the sun go down with you is my favorite pastime. Here's to many more sunsets together."
     }
 ];
 
+// Loop mode needs more slides than fit on screen, so the cards repeat;
+// the dots below still show one per real memory.
+const LOOP_SLIDES = [...CARDS, ...CARDS, ...CARDS];
+
 const CoverflowSlider: React.FC = () => {
+    const [swiper, setSwiper] = useState<SwiperInstance | null>(null);
+    const [activeCard, setActiveCard] = useState(0);
+
     return (
         <section className="relative py-24 overflow-hidden bg-gradient-to-b from-transparent to-pink-50/30">
             {/* Moving Pink Aura Background */}
@@ -79,20 +86,24 @@ const CoverflowSlider: React.FC = () => {
                         modifier: 1,
                         slideShadows: true,
                     }}
-                    pagination={{ clickable: true }}
-                    modules={[EffectCoverflow, Pagination, Autoplay]}
+                    modules={[EffectCoverflow, Autoplay]}
+                    onSwiper={setSwiper}
+                    onSlideChange={(s) => setActiveCard(s.realIndex % CARDS.length)}
+                    loop={true}
                     autoplay={{
-                        delay: 4000,
+                        delay: 5000,
                         disableOnInteraction: false,
+                        pauseOnMouseEnter: false,
                     }}
                     className="w-full py-12"
                 >
-                    {CARDS.map((card, index) => (
+                    {LOOP_SLIDES.map((card, index) => (
                         <SwiperSlide key={index} className="w-[300px] md:w-[400px]">
                             <div className="relative aspect-[3/4] rounded-3xl overflow-hidden shadow-2xl group border border-white/20">
                                 {card.video ? (
                                     <video
                                         src={card.video}
+                                        poster={card.poster}
                                         autoPlay
                                         loop
                                         muted
@@ -126,6 +137,20 @@ const CoverflowSlider: React.FC = () => {
                         </SwiperSlide>
                     ))}
                 </Swiper>
+
+                <div className="flex justify-center gap-2 mt-4">
+                    {CARDS.map((card, index) => (
+                        <button
+                            key={card.name}
+                            type="button"
+                            aria-label={`Show ${card.name}`}
+                            onClick={() => swiper?.slideToLoop(index)}
+                            className={`h-2 rounded-full transition-all duration-500 ${
+                                activeCard === index ? 'w-6 bg-[#db2777]' : 'w-2 bg-gray-400/60'
+                            }`}
+                        />
+                    ))}
+                </div>
             </div>
 
             <style dangerouslySetInnerHTML={{
@@ -133,9 +158,6 @@ const CoverflowSlider: React.FC = () => {
         .swiper-slide {
           background-position: center;
           background-size: cover;
-        }
-        .swiper-pagination-bullet-active {
-          background: #db2777 !important;
         }
         @keyframes float-slow {
           0%, 100% { transform: translate(0, 0); }

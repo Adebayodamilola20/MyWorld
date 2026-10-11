@@ -17,11 +17,8 @@ const PasswordEntry = ({ onUnlock }: PasswordEntryProps) => {
     const handleSubmit = (e?: React.FormEvent) => {
         if (e) e.preventDefault();
 
-        // You can change this date to the actual date you met
-        // Common formats: DD/MM/YYYY, YYYY-MM-DD, etc.
-        // For now, let's use a simple string check or a specific date.
-        // I'll make it "2022-02-14" as a placeholder, but you can change it!
-        const correctDate = "12/11/2025"; // User specified: November 12, 2025
+        // The date you first met: September 9, 2026
+        const correctDate = "09/09/2026";
 
         if (date === correctDate) {
             onUnlock();
@@ -67,7 +64,7 @@ const PasswordEntry = ({ onUnlock }: PasswordEntryProps) => {
                             </label>
                             <Input
                                 type="text"
-                                placeholder="12/11/2025"
+                                placeholder="09/09/2026"
                                 value={date}
                                 onChange={(e) => {
                                     setDate(e.target.value);

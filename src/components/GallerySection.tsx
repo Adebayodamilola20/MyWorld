@@ -1,49 +1,64 @@
+import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
-import she1 from "@/assets/she1.jpg";
-import she4 from "@/assets/she4.jpg";
-import she5 from "@/assets/she5.jpg";
-import she6 from "@/assets/she6.jpg";
-import she7 from "@/assets/she7.jpg";
-import she8 from "@/assets/she8.jpg";
-import she9 from "@/assets/she9.jpg";
-import her1 from "@/assets/her1.jpg";
-import her2 from "@/assets/her2.jpg";
-import her3 from "@/assets/her3.jpg";
-import her5 from "@/assets/her5.jpg";
-import her66 from "@/assets/her66.jpg";
-import m7 from "@/assets/m7.jpg";
-import m1 from "@/assets/m1.jpg";
-import m4 from "@/assets/m4.jpg";
-import m6 from "@/assets/m6.jpg";
-import m8 from "@/assets/m8.jpg";
-import m5 from "@/assets/m5.jpg";
+import { archiveMedia } from "@/data/maryamMedia";
 
-const photos = [
-  {
-    src: m1,
-    caption: "Timeless Beauty"
-  },
-  {
-    src: m4,
-    alt: "Ethereal Light",
-    caption: "Soft Whispers"
-  },
-  {
-    src: m6,
-    alt: "Luxury Fabric",
-    caption: "Silk & Satin"
-  },
-  {
-    src: m8,
-    caption: "Graceful Motion"
-  },
-  {
-    src: m5,
-    caption: "Velvet Dreams"
-  },
+// Exact box shapes (width / height) of the 12-slot archive wall, in order.
+// Media repeats to fill every slot until more photos are added.
+const boxRatios = [
+  4 / 3,
+  3 / 4,
+  4 / 3,
+  3 / 4,
+  834 / 1280,
+  9 / 16,
+  9 / 16,
+  9 / 16,
+  3 / 4,
+  3 / 4,
+  660 / 1280,
+  602 / 1080,
 ];
 
+const archiveSlots = boxRatios.map((ratio, i) => ({
+  ...archiveMedia[i % archiveMedia.length],
+  ratio,
+  index: i,
+}));
+
+type ArchiveSlot = (typeof archiveSlots)[number];
+
+// 1 column on phones, 2 on tablets, 3 on desktop (matches sm / lg breakpoints)
+const getColumnCount = () => {
+  if (typeof window === "undefined") return 3;
+  if (window.innerWidth >= 1024) return 3;
+  if (window.innerWidth >= 640) return 2;
+  return 1;
+};
+
+// Fill columns like CSS masonry: each item goes to the currently shortest column.
+// Plain flex columns avoid Safari's multi-column bug where animated items vanish.
+const splitIntoColumns = (slots: ArchiveSlot[], count: number) => {
+  const columns: ArchiveSlot[][] = Array.from({ length: count }, () => []);
+  const heights = new Array(count).fill(0);
+  slots.forEach((slot) => {
+    const shortest = heights.indexOf(Math.min(...heights));
+    columns[shortest].push(slot);
+    heights[shortest] += 1 / slot.ratio;
+  });
+  return columns;
+};
+
 const GallerySection = () => {
+  const [columnCount, setColumnCount] = useState(getColumnCount);
+
+  useEffect(() => {
+    const onResize = () => setColumnCount(getColumnCount());
+    window.addEventListener("resize", onResize);
+    return () => window.removeEventListener("resize", onResize);
+  }, []);
+
+  const columns = splitIntoColumns(archiveSlots, columnCount);
+
   return (
     <section className="relative py-32 md:py-48 bg-cream/30">
       <div className="container mx-auto px-6">
@@ -64,34 +79,56 @@ const GallerySection = () => {
         </motion.div>
 
         {/* Masonry grid */}
-        <div className="columns-1 sm:columns-2 lg:columns-3 gap-8 space-y-8">
-          {photos.map((photo, i) => (
-            <motion.div
-              key={i}
-              initial={{ opacity: 0, scale: 0.95 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              viewport={{ once: true, margin: "-50px" }}
-              transition={{ duration: 0.8, delay: i * 0.1 }}
-              className="break-inside-avoid relative group"
-            >
-              <div className="relative overflow-hidden rounded-[2rem] glow-rose border border-white/40">
-                <img
-                  src={photo.src}
-                  alt={photo.alt}
-                  className="w-full h-auto object-cover transition-transform duration-1000 group-hover:scale-110"
-                  loading="lazy"
-                />
+        <div className="flex gap-8 items-start">
+          {columns.map((column, c) => (
+            <div key={c} className="flex-1 min-w-0 flex flex-col gap-8">
+              {column.map((item) => (
+                <motion.div
+                  key={item.index}
+                  initial={{ opacity: 0, y: 24 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true, amount: 0.1 }}
+                  transition={{ duration: 0.8, delay: (item.index % 3) * 0.1 }}
+                  className="relative group"
+                >
+                  <div
+                    className="relative overflow-hidden rounded-[2rem] glow-rose border border-white/40 [transform:translateZ(0)]"
+                    style={{ aspectRatio: item.ratio }}
+                  >
+                    {item.type === "video" ? (
+                      <video
+                        src={item.src}
+                        poster={item.poster}
+                        aria-label={item.alt}
+                        className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110"
+                        autoPlay
+                        muted
+                        loop
+                        playsInline
+                        preload="auto"
+                      />
+                    ) : (
+                      <img
+                        src={item.src}
+                        alt={item.alt}
+                        className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110"
+                        loading={item.index < 3 ? "eager" : "lazy"}
+                        decoding="async"
+                      />
+                    )}
 
-                {/* Glassmorphism Hover Card */}
-                <div className="absolute inset-0 bg-black/10 opacity-0 group-hover:opacity-100 transition-opacity duration-700 flex items-center justify-center">
-                  <div className="glass-card px-8 py-4 backdrop-blur-md border border-white/30 transform translate-y-4 group-hover:translate-y-0 transition-transform duration-500">
-                    <span className="font-serif italic text-white text-xl">
-                      {photo.caption}
-                    </span>
+                    {/* Glassmorphism Hover Card */}
+                    <div className="absolute inset-0 bg-black/10 opacity-0 group-hover:opacity-100 transition-opacity duration-700 flex items-center justify-center">
+                      <div className="glass-card px-8 py-4 backdrop-blur-md border border-white/30 transform translate-y-4 group-hover:translate-y-0 transition-transform duration-500">
+                        <span className="font-serif italic text-white text-xl">
+                          {item.caption}
+                        </span>
+                      </div>
+                    </div>
                   </div>
-                </div>
-              </div>
-            </motion.div>
+                </motion.div>
+              ))}
+            </div>
           ))}
         </div>
       </div>

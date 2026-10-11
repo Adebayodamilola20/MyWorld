@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Move, RotateCw, Heart } from "lucide-react";
+import { maryamPhotos } from "@/data/maryamMedia";
 
 interface PolaroidProps {
     id: number;
@@ -15,39 +16,39 @@ interface PolaroidProps {
 const memories: PolaroidProps[] = [
     {
         id: 1,
-        image: "https://images.unsplash.com/photo-1518199266791-739f69a9b4b76?q=80&w=400&h=500&fit=crop",
+        image: maryamPhotos[0].src,
         rotation: -5,
         x: -100,
         y: -50,
-        caption: "The first smile I fell for",
-        note: "I still remember how you looked that day. You wore that blue sweater and your eyes caught the light in a way I'll never forget."
+        caption: "Maryam's crimson glow",
+        note: "There is something unforgettable about Maryam in her element: graceful, radiant, and completely herself."
     },
     {
         id: 2,
-        image: "https://images.unsplash.com/photo-1511733334857-e892c51b7d5e?q=80&w=400&h=500&fit=crop",
+        image: maryamPhotos[1].src,
         rotation: 8,
         x: 120,
         y: 30,
-        caption: "Magic in the air",
-        note: "The world just stopped when we were dancing in the rain. I knew right then that I wanted to spend every rainstorm with you."
+        caption: "Maryam in satin",
+        note: "Every detail of Maryam feels like a work of art, especially the quiet confidence she carries so beautifully."
     },
     {
         id: 3,
-        image: "https://images.unsplash.com/photo-1522673607200-164483ee062e?q=80&w=400&h=500&fit=crop",
+        image: maryamPhotos[2].src,
         rotation: -12,
         x: 50,
         y: -120,
-        caption: "Our secret spot",
-        note: "Nobody knows about the bridge where we carved our initials. It's our little corner of the universe."
+        caption: "That Maryam smile",
+        note: "Maryam's smile has a way of making an ordinary day feel like the best day in the world."
     },
     {
         id: 4,
-        image: "https://images.unsplash.com/photo-1494972308845-d171197ede17?q=80&w=400&h=500&fit=crop",
+        image: maryamPhotos[0].src,
         rotation: 4,
         x: -80,
         y: 100,
-        caption: "Coffee & Conversations",
-        note: "Could have stayed in that cafe forever. You make mundane moments feel like a movie."
+        caption: "Maryam, in every season",
+        note: "From the smallest moments to the biggest celebrations, Maryam is the memory I want to keep making."
     }
 ];
 

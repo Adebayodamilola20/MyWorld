@@ -3,29 +3,29 @@ import { Heart } from "lucide-react";
 
 const milestones = [
   {
-    date: "November 2025",
+    date: "September 9, 2026",
     title: "The Day We Met",
-    description: "A chance encounter that changed everything. The world became more colorful.",
+    description: "The day our story began. One moment, one connection, and a whole new world to discover together.",
   },
   {
-    date: "January 2025",
-    title: "Our First Date",
-    description: "Nervous laughter at the cinema turned into hours of conversation we never wanted to end.",
+    date: "September 2026",
+    title: "The First Conversations",
+    description: "The little conversations and shared laughs that brought us closer and made this feel like something special.",
   },
   {
-    date: "21th November 2025",
+    date: "September 15, 2026",
     title: "First 'I Love You'",
-    description: "Three words that felt like coming home. Whispered under a sky full of stars.",
+    description: "Three words that made everything feel even more real: I love you.",
   },
   {
-    date: "January 2025",
-    title: "Our First Trip Together",
-    description: "Cinemas, Outdoors, and the realization that anywhere with you is paradise.",
+    date: "Coming Soon",
+    title: "Adventures Ahead",
+    description: "Our first trip is still waiting for us. Until then, every little moment together is part of our adventure.",
   },
   {
     date: "Today",
-    title: "Your Birthday",
-    description: "Another year of you gracing this world. Every day with you is a gift I'll never take for granted.",
+    title: "Maryam's Birthday",
+    description: "Another year of Maryam gracing this world. Every day with her is a gift I'll never take for granted.",
   },
 ];
 

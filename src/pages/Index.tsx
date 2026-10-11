@@ -13,7 +13,10 @@ import ComplimentTicker from "@/components/ComplimentTicker";
 import BirthdayCake from "@/components/BirthdayCake";
 import CoverflowSlider from "@/components/CoverflowSlider";
 import TogetherTimer from "@/components/TogetherTimer";
+import CoupleLogo from "@/components/CoupleLogo";
 import PolaroidMemoryWall from "@/components/PolaroidMemoryWall";
+import MusicPlayer from "@/components/MusicPlayer";
+import FuturePlans from "@/components/FuturePlans";
 
 type FlowState = "locked" | "birthday" | "main";
 
@@ -53,11 +56,14 @@ const Index = () => {
       {flowState === "main" && (
         <div className="w-full">
           <FloatingPetals />
+          <CoupleLogo />
           <TogetherTimer />
+          <MusicPlayer />
           <HeroSection />
           <GallerySection />
           <LoveLetterSection />
           <TimelineSection />
+          <FuturePlans />
           <FutureLoadingBar />
           <FortuneCookie />
           <ComplimentTicker />

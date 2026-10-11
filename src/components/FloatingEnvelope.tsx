@@ -1,13 +1,35 @@
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { X } from "lucide-react";
+import { AudioLines, Pause, Play, X } from "lucide-react";
 
 const FloatingEnvelope = () => {
     const [isOpen, setIsOpen] = useState(false);
     const [isLetterVisible, setIsLetterVisible] = useState(false);
+    const [isVoicePlaying, setIsVoicePlaying] = useState(false);
+    const voiceAudioRef = useRef<HTMLAudioElement>(null);
+
+    useEffect(() => {
+        return () => voiceAudioRef.current?.pause();
+    }, []);
+
+    const toggleVoiceAudio = async () => {
+        const audio = voiceAudioRef.current;
+        if (!audio) return;
+
+        if (audio.paused) {
+            try {
+                await audio.play();
+            } catch {
+                setIsVoicePlaying(false);
+            }
+        } else {
+            audio.pause();
+        }
+    };
 
     const toggleEnvelope = () => {
         if (isOpen) {
+            voiceAudioRef.current?.pause();
             setIsLetterVisible(false);
             setTimeout(() => setIsOpen(false), 500);
         } else {
@@ -91,6 +113,41 @@ const FloatingEnvelope = () => {
                                 <p>
                                     From the way you laugh at your own jokes before you've even finished them, to the quiet strength you show when things get tough—you're a masterpiece in every sense of the word.
                                 </p>
+                                <p>
+                                    I also want to say that I am truly sorry for hurting you a few days ago and making you feel that way. You did not deserve it, and I take responsibility for my words and actions. I love you, and I promise to be more patient, thoughtful, and careful with your heart. I will do better, and I will not make you feel that way again.
+                                </p>
+
+                                <audio
+                                    ref={voiceAudioRef}
+                                    src="/audio/maryam-letter.m4a"
+                                    preload="metadata"
+                                    onPlay={() => setIsVoicePlaying(true)}
+                                    onPause={() => setIsVoicePlaying(false)}
+                                    onEnded={() => setIsVoicePlaying(false)}
+                                />
+                                <div className="mx-auto flex w-full max-w-sm items-center gap-3 rounded-full border border-primary/20 bg-background/60 px-3 py-2 text-left shadow-lg backdrop-blur-md">
+                                    <motion.div
+                                        animate={isVoicePlaying ? { rotate: 360 } : { rotate: 0 }}
+                                        transition={isVoicePlaying ? { duration: 6, repeat: Infinity, ease: "linear" } : { duration: 0.2 }}
+                                        className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-primary/10 text-primary"
+                                    >
+                                        <AudioLines className="h-5 w-5" />
+                                    </motion.div>
+                                    <div className="min-w-0 flex-1">
+                                        <p className="truncate font-serif text-sm text-foreground">Tap here to listen</p>
+                                        <p className="truncate text-[10px] uppercase tracking-[0.16em] text-muted-foreground">
+                                            A little message from me
+                                        </p>
+                                    </div>
+                                    <button
+                                        type="button"
+                                        onClick={toggleVoiceAudio}
+                                        aria-label={isVoicePlaying ? "Pause voice message" : "Play voice message"}
+                                        className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-primary text-primary-foreground shadow-lg shadow-primary/25 transition-transform hover:scale-105 active:scale-95"
+                                    >
+                                        {isVoicePlaying ? <Pause className="h-4 w-4" fill="currentColor" /> : <Play className="ml-0.5 h-4 w-4" fill="currentColor" />}
+                                    </button>
+                                </div>
                                 <p>
                                     This space is a small tribute to you. A gallery of our memories and a promise of etcetera. I love you more than words can carry.
                                 </p>
