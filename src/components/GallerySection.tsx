@@ -3,7 +3,6 @@ import { motion } from "framer-motion";
 import { archiveMedia } from "@/data/maryamMedia";
 
 // Exact box shapes (width / height) of the 12-slot archive wall, in order.
-// Media repeats to fill every slot until more photos are added.
 const boxRatios = [
   4 / 3,
   3 / 4,
@@ -19,9 +18,9 @@ const boxRatios = [
   602 / 1080,
 ];
 
-const archiveSlots = boxRatios.map((ratio, i) => ({
-  ...archiveMedia[i % archiveMedia.length],
-  ratio,
+const archiveSlots = archiveMedia.slice(0, boxRatios.length).map((item, i) => ({
+  ...item,
+  ratio: boxRatios[i],
   index: i,
 }));
 
@@ -79,9 +78,9 @@ const GallerySection = () => {
         </motion.div>
 
         {/* Masonry grid */}
-        <div className="flex gap-8 items-start">
+        <div className="flex gap-6 items-start max-w-5xl mx-auto">
           {columns.map((column, c) => (
-            <div key={c} className="flex-1 min-w-0 flex flex-col gap-8">
+            <div key={c} className="flex-1 min-w-0 flex flex-col gap-6">
               {column.map((item) => (
                 <motion.div
                   key={item.index}

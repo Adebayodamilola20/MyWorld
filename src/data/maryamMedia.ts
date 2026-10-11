@@ -17,7 +17,8 @@ import archivePhoto2 from "@/assets/archive/archive-photo-2.jpg";
 import archivePhoto3 from "@/assets/archive/archive-photo-3.jpg";
 import archivePhoto4 from "@/assets/archive/archive-photo-4.jpg";
 import archiveVideo1 from "@/assets/archive/archive-video-1.mp4";
-import archiveVideo2 from "@/assets/archive/archive-video-2.mp4";
+import archiveVideo3 from "@/assets/archive/archive-video-3.mp4";
+import archiveVideo4 from "@/assets/archive/archive-video-4.mp4";
 import maryamPoster01 from "@/assets/posters/maryam-video-01.jpg";
 import maryamPoster02 from "@/assets/posters/maryam-video-02.jpg";
 import maryamPoster03 from "@/assets/posters/maryam-video-03.jpg";
@@ -30,7 +31,8 @@ import maryamPoster09 from "@/assets/posters/maryam-video-09.jpg";
 import maryamPoster10 from "@/assets/posters/maryam-video-10.jpg";
 import maryamPoster11 from "@/assets/posters/maryam-video-11.jpg";
 import archivePoster1 from "@/assets/posters/archive-video-1.jpg";
-import archivePoster2 from "@/assets/posters/archive-video-2.jpg";
+import archivePoster3 from "@/assets/posters/archive-video-3.jpg";
+import archivePoster4 from "@/assets/posters/archive-video-4.jpg";
 
 export const maryamPhotos = [
   {
@@ -87,11 +89,19 @@ export type ArchiveItem = {
   poster?: string;
 };
 
+// 12 different items, one per archive box. Nothing here repeats the hero
+// (portrait, smile, video 11) or the memories slider (videos 01-05).
 export const archiveMedia: ArchiveItem[] = [
   { type: "photo", src: archivePhoto1, alt: "Maryam in a rose hijab and glasses", caption: "Soft Mornings" },
   { type: "video", src: archiveVideo1, poster: archivePoster1, alt: "Maryam in her striped top and tinted glasses", caption: "Pure Joy" },
   { type: "photo", src: archivePhoto2, alt: "Maryam smiling in a rose hijab", caption: "Infinite Warmth" },
+  { type: "photo", src: maryamSeated, alt: "Maryam seated in her red satin dress", caption: "Elegance, Embodied" },
+  { type: "video", src: archiveVideo3, poster: archivePoster3, alt: "A moment with Maryam", caption: "Main Character" },
+  { type: "video", src: maryamVideo06, poster: maryamPoster06, alt: "A moment with Maryam", caption: "Luminous Soul" },
   { type: "photo", src: archivePhoto3, alt: "Maryam in a colourful scarf", caption: "Golden Light" },
-  { type: "video", src: archiveVideo2, poster: archivePoster2, alt: "Maryam dancing in her striped top", caption: "Main Character" },
+  { type: "video", src: maryamVideo07, poster: maryamPoster07, alt: "A moment with Maryam", caption: "Serene Moments" },
+  { type: "video", src: archiveVideo4, poster: archivePoster4, alt: "A moment with Maryam", caption: "Velvet Dreams" },
   { type: "photo", src: archivePhoto4, alt: "Maryam glowing in the sunlight", caption: "Elegant Grace" },
+  { type: "video", src: maryamVideo08, poster: maryamPoster08, alt: "A moment with Maryam", caption: "Midnight Pearl" },
+  { type: "video", src: maryamVideo09, poster: maryamPoster09, alt: "A moment with Maryam", caption: "Floral Bloom" },
 ];

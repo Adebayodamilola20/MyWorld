@@ -78,7 +78,7 @@ const CoverflowSlider: React.FC = () => {
                     grabCursor={true}
                     centeredSlides={true}
                     slidesPerView={'auto'}
-                    speed={1000}
+                    speed={1800}
                     coverflowEffect={{
                         rotate: 35,
                         stretch: -20,
@@ -155,6 +155,9 @@ const CoverflowSlider: React.FC = () => {
 
             <style dangerouslySetInnerHTML={{
                 __html: `
+        .swiper-wrapper, .swiper-slide {
+          transition-timing-function: cubic-bezier(0.65, 0, 0.35, 1) !important;
+        }
         .swiper-slide {
           background-position: center;
           background-size: cover;
