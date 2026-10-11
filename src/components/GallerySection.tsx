@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
+import AutoplayVideo from "@/components/AutoplayVideo";
 import { archiveMedia } from "@/data/maryamMedia";
 
 // Exact box shapes (width / height) of the 12-slot archive wall, in order.
@@ -95,15 +96,11 @@ const GallerySection = () => {
                     style={{ aspectRatio: item.ratio }}
                   >
                     {item.type === "video" ? (
-                      <video
+                      <AutoplayVideo
                         src={item.src}
                         poster={item.poster}
                         aria-label={item.alt}
                         className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110"
-                        autoPlay
-                        muted
-                        loop
-                        playsInline
                         preload="auto"
                       />
                     ) : (

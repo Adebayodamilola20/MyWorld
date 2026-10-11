@@ -3,6 +3,7 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import type { Swiper as SwiperInstance } from 'swiper';
 import { EffectCoverflow, Autoplay } from 'swiper/modules';
 import { motion } from 'framer-motion';
+import AutoplayVideo from '@/components/AutoplayVideo';
 
 // Import local assets with correct casing
 import { maryamVideos, maryamVideoPosters } from "@/data/maryamMedia";
@@ -101,15 +102,9 @@ const CoverflowSlider: React.FC = () => {
                         <SwiperSlide key={index} className="w-[300px] md:w-[400px]">
                             <div className="relative aspect-[3/4] rounded-3xl overflow-hidden shadow-2xl group border border-white/20">
                                 {card.video ? (
-                                    <video
+                                    <AutoplayVideo
                                         src={card.video}
                                         poster={card.poster}
-                                        autoPlay
-                                        loop
-                                        muted
-                                        playsInline
-                                        webkit-playsinline="true"
-                                        controls={false}
                                         preload="auto"
                                         className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
                                     />

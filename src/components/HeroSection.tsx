@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 import FloralFlourish from "@/components/FloralFlourish";
+import AutoplayVideo from "@/components/AutoplayVideo";
 import { maryamPhotos, maryamVideos, maryamVideoPosters } from "@/data/maryamMedia";
 
 // Positions are the bouquet centres over the two-line headline
@@ -43,7 +44,7 @@ const HeroSection = () => {
       <div className="absolute top-1/4 left-1/4 w-2 h-2 bg-primary rounded-full blur-[1px] animate-pulse neon-glow-pink" />
       <div className="absolute bottom-1/3 right-1/4 w-3 h-3 bg-primary rounded-full blur-[1px] animate-pulse delay-700 neon-glow-pink" />
 
-      <div className="relative z-10 container mx-auto px-6 flex flex-col items-center gap-8 md:gap-10 py-12 md:py-16">
+      <div className="relative z-10 container mx-auto px-6 flex flex-col items-center gap-8 md:gap-10 pt-36 pb-12 md:pt-40 md:pb-16">
         {/* Portrait - High end photography slot */}
         <motion.div
           initial={{ opacity: 0, scale: 0.9 }}
@@ -72,15 +73,9 @@ const HeroSection = () => {
           </motion.div>
 
           <div className="relative z-10 w-64 h-80 md:w-80 md:h-[28rem] lg:w-[28rem] lg:h-[35rem] rounded-3xl overflow-hidden glow-rose border-4 border-white/20 bg-muted">
-            <video
+            <AutoplayVideo
               src={maryamVideos[10]}
               poster={maryamVideoPosters[10]}
-              autoPlay
-              loop
-              muted
-              playsInline
-              webkit-playsinline="true"
-              controls={false}
               preload="auto"
               className="w-full h-full object-cover"
             />
@@ -91,18 +86,18 @@ const HeroSection = () => {
             initial={{ opacity: 0, x: -20 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ delay: 1, duration: 0.8 }}
-            className="absolute z-20 -left-4 md:-left-12 top-12 glass-card px-6 py-4 shadow-2xl border border-white/40"
+            className="absolute z-20 -left-4 md:-left-12 top-[58%] md:top-12 glass-card px-4 py-2 md:px-6 md:py-4 shadow-2xl border border-white/40"
           >
-            <span className="font-serif italic text-primary text-lg">Sophistication</span>
+            <span className="font-serif italic text-primary text-base md:text-lg">Sophistication</span>
           </motion.div>
 
           <motion.div
             initial={{ opacity: 0, x: 20 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ delay: 1.4, duration: 0.8 }}
-            className="absolute z-20 -right-4 md:-right-12 bottom-20 glass-card px-6 py-4 shadow-2xl border border-white/40"
+            className="absolute z-20 -right-4 md:-right-12 bottom-14 md:bottom-20 glass-card px-4 py-2 md:px-6 md:py-4 shadow-2xl border border-white/40"
           >
-            <span className="font-serif italic text-primary text-lg">Grace</span>
+            <span className="font-serif italic text-primary text-base md:text-lg">Grace</span>
           </motion.div>
 
           {/* Glass overlay label */}

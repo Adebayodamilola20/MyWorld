@@ -2,6 +2,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import gsap from 'gsap';
 import BokehHearts from './BokehHearts';
+import { unlockSong } from '@/lib/song';
 
 interface BirthdayCakeProps {
     onExtinguish: () => void;
@@ -13,6 +14,7 @@ const BirthdayCake: React.FC<BirthdayCakeProps> = ({ onExtinguish }) => {
     const audioContextRef = useRef<AudioContext | null>(null);
     const analyserRef = useRef<AnalyserNode | null>(null);
     const microphoneRef = useRef<MediaStreamAudioSourceNode | null>(null);
+    const streamRef = useRef<MediaStream | null>(null);
     const animationFrameRef = useRef<number | null>(null);
     const cakeRef = useRef<HTMLDivElement>(null);
     const flameRefs = useRef<(HTMLDivElement | null)[]>([]);
@@ -36,12 +38,16 @@ const BirthdayCake: React.FC<BirthdayCakeProps> = ({ onExtinguish }) => {
         return () => {
             if (animationFrameRef.current) cancelAnimationFrame(animationFrameRef.current);
             if (audioContextRef.current) audioContextRef.current.close();
+            // Turn the microphone off so phones go back to normal audio playback
+            streamRef.current?.getTracks().forEach((track) => track.stop());
         };
     }, []);
 
     const startListening = async () => {
+        unlockSong();
         try {
             const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+            streamRef.current = stream;
             setAudioPermission(true);
 
             const audioContext = new (window.AudioContext || (window as any).webkitAudioContext)();

@@ -237,3 +237,10 @@
     animation: bokeh-drift 10s ease-in-out infinite;
   }
 }
+/* Never show the iPhone "tap to play" overlay on the decorative videos */
+video::-webkit-media-controls-start-playback-button,
+video::-webkit-media-controls-overlay-play-button,
+video::-webkit-media-controls {
+  display: none !important;
+  -webkit-appearance: none;
+}

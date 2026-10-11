@@ -4,6 +4,7 @@ import FloatingPetals from "./FloatingPetals";
 import { Input } from "./ui/input";
 import { Button } from "./ui/button";
 import { Heart } from "lucide-react";
+import { unlockSong } from "@/lib/song";
 
 interface PasswordEntryProps {
     onUnlock: () => void;
@@ -21,6 +22,8 @@ const PasswordEntry = ({ onUnlock }: PasswordEntryProps) => {
         const correctDate = "09/09/2026";
 
         if (date === correctDate) {
+            // This tap is what lets the song play later on phones
+            unlockSong();
             onUnlock();
         } else {
             setError(true);

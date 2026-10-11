@@ -1,11 +1,11 @@
 import { useEffect, useRef, useState } from "react";
 import { motion } from "framer-motion";
 import { Music2, Pause, Play } from "lucide-react";
-
-const SONG_SOURCE = "/audio/stuck-on-you.mp3";
+import { getSong } from "@/lib/song";
 
 const MusicPlayer = () => {
-    const audioRef = useRef<HTMLAudioElement>(null);
+    const audioRef = useRef<HTMLAudioElement>(getSong());
+    const pausedByUserRef = useRef(false);
     const [isPlaying, setIsPlaying] = useState(false);
     const [hasAudioError, setHasAudioError] = useState(false);
 
@@ -23,14 +23,28 @@ const MusicPlayer = () => {
         audio.addEventListener("pause", handlePause);
         audio.addEventListener("error", handleError);
 
-        // The candle interaction has just finished, so try to begin the song.
+        setIsPlaying(!audio.paused);
+
+        // Start as soon as the main site opens. The password tap has already
+        // unlocked audio on phones; if it's still blocked, start on the next tap.
+        const startOnTap = (e: Event) => {
+            removeTapListeners();
+            // The play/pause button handles its own taps
+            if ((e.target as Element | null)?.closest("[data-music-toggle]")) return;
+            if (audio.paused && !pausedByUserRef.current) audio.play().catch(() => {});
+        };
+        const removeTapListeners = () => {
+            document.removeEventListener("touchstart", startOnTap);
+            document.removeEventListener("click", startOnTap);
+        };
         audio.play().catch(() => {
-            // Some mobile browsers require the circular play button to be tapped.
-            setIsPlaying(false);
+            document.addEventListener("touchstart", startOnTap, { passive: true });
+            document.addEventListener("click", startOnTap);
         });
 
         return () => {
             audio.pause();
+            removeTapListeners();
             audio.removeEventListener("play", handlePlay);
             audio.removeEventListener("pause", handlePause);
             audio.removeEventListener("error", handleError);
@@ -42,12 +56,14 @@ const MusicPlayer = () => {
         if (!audio) return;
 
         if (audio.paused) {
+            pausedByUserRef.current = false;
             try {
                 await audio.play();
             } catch {
                 setIsPlaying(false);
             }
         } else {
+            pausedByUserRef.current = true;
             audio.pause();
         }
     };
@@ -59,8 +75,6 @@ const MusicPlayer = () => {
             transition={{ duration: 0.7, delay: 0.3 }}
             className="fixed bottom-4 left-1/2 z-[90] w-[calc(100%-2rem)] max-w-sm"
         >
-            <audio ref={audioRef} src={SONG_SOURCE} loop preload="auto" />
-
             <div className="flex items-center gap-3 rounded-full border border-primary/20 bg-background/85 px-3 py-2 shadow-[0_8px_30px_rgba(0,0,0,0.18)] backdrop-blur-xl">
                 <motion.div
                     animate={isPlaying ? { rotate: 360 } : { rotate: 0 }}
@@ -80,6 +94,7 @@ const MusicPlayer = () => {
                 <button
                     type="button"
                     onClick={togglePlayback}
+                    data-music-toggle
                     aria-label={isPlaying ? "Pause Stuck on You" : "Play Stuck on You"}
                     className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-primary text-primary-foreground shadow-lg shadow-primary/25 transition-transform hover:scale-105 active:scale-95"
                 >
